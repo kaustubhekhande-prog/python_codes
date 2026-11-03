@@ -1,15 +1,38 @@
-"""
-Forward Chaining
+# Step 1: Initial Facts
+facts = {"A", "B"}
 
-The uploaded PDF contains only the heading "Assi5 Forward Chaining"
-on page 4; it does not contain the program code.
+# Step 2: Rules
+# (Conditions, Conclusion)
+rules = [
+    (["A", "B"], "C"),
+    (["C"], "D"),
+    (["D"], "E"),
+    (["E"], "F")
+]
 
-Add the Forward Chaining program here when you have its source code.
-"""
-def run():
-    print("Forward Chaining code was not present in the supplied PDF.")
-    print("Please add the program code to forward_chaining.py.")
+print("Initial Facts:", facts)
 
+print("\nForward Chaining Process:\n")
 
-if __name__ == "__main__":
-    run()
+new_fact = True
+
+# Repeat until no new fact is generated
+while new_fact:
+    new_fact = False
+
+    # Check every rule
+    for conditions, conclusion in rules:
+
+        # Are all conditions true?
+        if all(condition in facts for condition in conditions):
+
+            # Add new fact if not already present
+            if conclusion not in facts:
+                facts.add(conclusion)
+
+                print(conditions, "->", conclusion)
+
+                new_fact = True
+
+print("\nFinal Facts:")
+print(facts)
